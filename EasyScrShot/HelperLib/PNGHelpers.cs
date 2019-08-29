@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
-using PNGCompression;
 
 namespace EasyScrShot.HelperLib
 {
@@ -23,7 +22,7 @@ namespace EasyScrShot.HelperLib
         {
             int i, j;
             fileCount = fileList.Length;
-            PreCompress();
+            //PreCompress();
             if (fileCount < threadsMaxCount)
                 threadsMaxCount = fileCount;
 
@@ -49,7 +48,7 @@ namespace EasyScrShot.HelperLib
             }
             Task.WaitAll(tasks);
 
-            RemoveTemp("optipng.exe");
+            //RemoveTemp("optipng.exe");
         }
 
         private static void PNGCompress(object fileNameObject)
@@ -59,31 +58,14 @@ namespace EasyScrShot.HelperLib
 
         private static void PNGCompress(string fileName)
         {
-            PNGCompressor compressor = new PNGCompressor();
-            LosslessInputSettings inputSettings = new LosslessInputSettings();
-            inputSettings.OptimizationLevel = OptimizationLevel.Level1;
-            compressor.CompressImageLossLess(fileName, "temp." + fileName, inputSettings);
-            FileInfo file = new FileInfo(fileName);
-            file.Delete();
-            file = new FileInfo("temp." + fileName);
-            file.MoveTo(fileName);
+            OptiPNG optiPNG = new OptiPNG();
+            optiPNG.LosslessCompress(fileName, "temp." + fileName);
             completeCount++;
         }
 
         private static void PreCompress()
         {
-            Bitmap bitmap = new Bitmap(60, 60);
-            Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.Clear(Color.Aquamarine);
-            graphics.Save();
-            graphics.Dispose();
-            bitmap.Save("pre.bmp", ImageFormat.Bmp);
-            PNGCompressor compressor = new PNGCompressor();
-            LosslessInputSettings inputSettings = new LosslessInputSettings();
-            inputSettings.OptimizationLevel = OptimizationLevel.Level0;
-            compressor.CompressImageLossLess("pre.bmp", "pre.png", inputSettings);
-            RemoveTemp("pre.bmp");
-            RemoveTemp("pre.png");
+
             completeCount = 0;
         }
 
