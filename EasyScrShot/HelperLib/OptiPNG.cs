@@ -23,19 +23,20 @@ namespace EasyScrShot.HelperLib
                 Level9 = "-o9";
         };
 
-        private string Arguments = "-nx";
+        private string Arguments;
         
         public OptiPNG()
         {
-            Arguments += " " + OptimizationLevel.Level1;
+            Arguments += OptimizationLevel.Level1;
         }
         public OptiPNG(string optimizationLevel)
         {
-            Arguments += " " + optimizationLevel;
+            Arguments += optimizationLevel;
         }
 
         public void LosslessCompress(string inputFile, string outputFile)
         {
+            Arguments += " -nx";
             Arguments += " " + "\"" + inputFile + "\"";
             Arguments += " -out " + "\"" + outputFile + "\"";
             Process process = new Process();

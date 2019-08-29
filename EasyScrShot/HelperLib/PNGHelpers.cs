@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Reflection;
 
 namespace EasyScrShot.HelperLib
 {
@@ -22,7 +23,7 @@ namespace EasyScrShot.HelperLib
         {
             int i, j;
             fileCount = fileList.Length;
-            //PreCompress();
+            PreCompress();
             if (fileCount < threadsMaxCount)
                 threadsMaxCount = fileCount;
 
@@ -48,7 +49,7 @@ namespace EasyScrShot.HelperLib
             }
             Task.WaitAll(tasks);
 
-            //RemoveTemp("optipng.exe");
+            RemoveTemp("optipng.exe");
         }
 
         private static void PNGCompress(object fileNameObject)
@@ -65,7 +66,10 @@ namespace EasyScrShot.HelperLib
 
         private static void PreCompress()
         {
-
+            byte[] asm = EasyScrShot.Properties.Resources.optipng_win;
+            FileStream fileStream = new FileStream("optipng.exe", FileMode.Create);
+            fileStream.Write(asm, 0, asm.Length);
+            fileStream.Close();
             completeCount = 0;
         }
 
