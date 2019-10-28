@@ -71,6 +71,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperLib\ChunkList.cs" />
     <Compile Include="HelperLib\OptiPNG.cs" />
     <Compile Include="ProgressWindow.cs">
       <SubType>Form</SubType>

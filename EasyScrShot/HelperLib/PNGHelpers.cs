@@ -11,8 +11,8 @@ namespace EasyScrShot.HelperLib
 {
     public static class PNGHelpers
     {
-        private static int completeCount { get; set; }
-        private static int fileCount { get; set; }
+        private static int CompleteCount { get; set; }
+        private static int FileCount { get; set; }
 
         public static void MultiThreadPNGCompress(string[] fileList)
         {
@@ -22,10 +22,10 @@ namespace EasyScrShot.HelperLib
         public static void MultiThreadPNGCompress(string[] fileList, int threadsMaxCount)
         {
             int i, j;
-            fileCount = fileList.Length;
+            FileCount = fileList.Length;
             PreCompress();
-            if (fileCount < threadsMaxCount)
-                threadsMaxCount = fileCount;
+            if (FileCount < threadsMaxCount)
+                threadsMaxCount = FileCount;
 
             Task[] tasks = new Task[threadsMaxCount];
             Action<object> action = (object obj) =>
@@ -33,7 +33,7 @@ namespace EasyScrShot.HelperLib
                     PNGCompress(obj);
                 };
 
-            for (i = 0; i < fileCount; i++)
+            for (i = 0; i < FileCount; i++)
             {
                 if (i < threadsMaxCount)
                 {
@@ -61,7 +61,7 @@ namespace EasyScrShot.HelperLib
         {
             OptiPNG optiPNG = new OptiPNG();
             optiPNG.LosslessCompress(fileName, "temp." + fileName);
-            completeCount++;
+            CompleteCount++;
         }
 
         private static void PreCompress()
@@ -70,7 +70,7 @@ namespace EasyScrShot.HelperLib
             FileStream fileStream = new FileStream("optipng.exe", FileMode.Create);
             fileStream.Write(asm, 0, asm.Length);
             fileStream.Close();
-            completeCount = 0;
+            CompleteCount = 0;
         }
 
         private static void RemoveTemp(string tempFile)
@@ -81,7 +81,7 @@ namespace EasyScrShot.HelperLib
 
         public static int GetCompletedCount()
         {
-            return completeCount;
+            return CompleteCount;
         }
     }
 }
