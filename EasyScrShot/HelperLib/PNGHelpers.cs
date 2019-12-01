@@ -25,21 +25,34 @@ namespace EasyScrShot.HelperLib
                 Level9 = "-o9";
         };
 
-        private string Arguments = "-nx";
+        private string Arguments;
 
-        internal OptiPNG()
+        internal OptiPNG() :
+            this(OptimizationLevel.Level1)
         {
-            Arguments += " " + OptimizationLevel.Level1;
         }
         internal OptiPNG(string optimizationLevel)
         {
-            Arguments += " " + optimizationLevel;
+            Arguments = $" {optimizationLevel}";
+        }
+
+        internal void LosslessCompress(string inputFile)
+        {
+            Arguments += $" -nx \"{inputFile}\" -backup";
+            ExecuteOptiPNG();
         }
 
         internal void LosslessCompress(string inputFile, string outputFile)
         {
-            Arguments += " " + "\"" + inputFile + "\"";
-            Arguments += " -out " + "\"" + outputFile + "\"";
+            if (inputFile.Equals(outputFile))
+                Arguments += $" -nx \"{inputFile}\" -backup";
+            else
+                Arguments += $" -nx \"{inputFile}\" -out \"{outputFile}\"";
+            ExecuteOptiPNG();
+        }
+
+        private void ExecuteOptiPNG()
+        {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             process.StartInfo.FileName = "./optipng";
             process.StartInfo.UseShellExecute = false;
@@ -105,7 +118,7 @@ namespace EasyScrShot.HelperLib
         private static void PNGCompress(string fileName)
         {
             OptiPNG optiPNG = new OptiPNG();
-            optiPNG.LosslessCompress(fileName, "temp." + fileName);
+            optiPNG.LosslessCompress(fileName);
             CompleteCount++;
         }
 
