@@ -68,5 +68,25 @@ namespace EasyScrShot.Properties {
                 return ResourceManager.GetString("config_schema", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] optipng_linux {
+            get {
+                object obj = ResourceManager.GetObject("optipng_linux", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] optipng_win {
+            get {
+                object obj = ResourceManager.GetObject("optipng_win", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
