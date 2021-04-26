@@ -1,11 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Reflection;
 
 namespace EasyScrShot.HelperLib
 {
@@ -38,16 +33,16 @@ namespace EasyScrShot.HelperLib
 
         internal void LosslessCompress(string inputFile)
         {
-            Arguments += $" -nx \"{inputFile}\" -backup";
+            Arguments += $" -preserve \"{inputFile}\" -backup";
             ExecuteOptiPNG();
         }
 
         internal void LosslessCompress(string inputFile, string outputFile)
         {
             if (inputFile.Equals(outputFile))
-                Arguments += $" -nx \"{inputFile}\" -backup";
+                Arguments += $" -preserve \"{inputFile}\" -backup";
             else
-                Arguments += $" -nx \"{inputFile}\" -out \"{outputFile}\"";
+                Arguments += $" -preserve \"{inputFile}\" -out \"{outputFile}\"";
             ExecuteOptiPNG();
         }
 
