@@ -124,7 +124,7 @@ namespace EasyScrShot.HelperLib
 
         private static void PreCompress()
         {
-            byte[] asm = EasyScrShot.Properties.Resources.optipng_win;
+            byte[] asm = EasyScrShot.Properties.Resources.optipng;
             FileStream fileStream = new FileStream("optipng.exe", FileMode.Create);
             fileStream.Write(asm, 0, asm.Length);
             fileStream.Close();

@@ -121,10 +121,7 @@
     <value>{"description":"Schema for EasyScrShot config file","type":"object","properties":{"accounts":{"type":"array","items":{"type":"object","properties":{"user":{"type":"string","required":true},"url":{"type":"string","required":true},"key":{"type":"string","required":true},"default":{"type":"boolean"}}}}}}</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="optipng_linux" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\optipng;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="optipng_win" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="optipng" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\optipng.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
